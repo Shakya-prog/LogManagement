@@ -1,0 +1,21 @@
+:root{
+  --glass: rgba(255, 255, 255, 0.54);
+  --boxShadow: 0px 19px 60px rgb(0 0 0 / 8%);
+  --smboxShadow: -79px 51px 60px rgba(0, 0, 0, 0.08);
+  --activeItem: #f799a354;
+}
+
+.App{
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(135deg, #1f1c2c, #2d2b42, #0c0c1c);
+color: #f0f0f0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}

@@ -1,0 +1,48 @@
+.Dashboard{
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(135deg, #1f1c2c, #2d2b42, #0c0c1c);
+color: #f0f0f0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+.AppGlass{
+  display: grid;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  height: 97%;
+  width: 97%;
+  border-radius: 2rem;
+  background-color: var(--glass);
+  
+  grid-template-columns: 11rem auto 20rem;
+  background: rgba(255, 255, 255, 0.05); 
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2); 
+  backdrop-filter: blur(10px); 
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  gap: 10px;
+}
+
+@media screen and (max-width: 1200px) {
+  .AppGlass{
+    grid-template-columns: 10% 50% auto;
+    overflow-y: scroll;
+  }
+}
+@media screen and (max-width: 768px){
+  .AppGlass{
+    grid-template-columns: 1fr;
+  }
+  .AppGlass::-webkit-scrollbar{
+    display: none;
+  }
+}
