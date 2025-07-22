@@ -82,7 +82,7 @@ const ErrorsTrendChart = () => {
   const chartSeries = [
     {
       name: "Errors",
-      data: [12, 19, 7, 22, 15, 9, 18], // You can replace with dynamic data
+      data: [12, 19, 7, 22, 15, 9, 18], 
     },
   ];
 

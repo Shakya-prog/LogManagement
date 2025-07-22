@@ -1,15 +1,11 @@
-import React from 'react';
-import './RightSide.css';
-import Updates from '../Updates/Updates';
-import ErrorsTrendChart from '../ErrorsTrendChart/ErrorsTrendChart';
-import ProfileMenu from '../NavBar/ProfileMenu';
+import React from "react";
+import "./RightSide.css";
+import Updates from "../Updates/Updates";
+import ErrorsTrendChart from "../ErrorsTrendChart/ErrorsTrendChart";
 
-const RightSide = ({ user }) => {
+const RightSide = () => {
   return (
     <div className="RightSide">
-      <div style={{ display: "flex", justifyContent: "flex-end" }}>
-        <ProfileMenu user={user} />
-      </div>
       <div>
         <h3>Updates</h3>
         <Updates />

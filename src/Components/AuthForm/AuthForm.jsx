@@ -1,56 +1,118 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 import './AuthForm.css';
 
-const AuthForm = ({ type, onSubmit }) => {
-  const isLogin = type === "login";
+const AuthForm = ({ type, onSubmit, loading }) => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [resetEmail, setResetEmail] = useState("");
+  const [resetLoading, setResetLoading] = useState(false);
+  const [resetSuccess, setResetSuccess] = useState(false);
+
+  const openModal = (e) => {
+    e.preventDefault();
+    setModalVisible(true);
+    setResetEmail("");
+    setResetLoading(false);
+    setResetSuccess(false);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+    setResetEmail("");
+    setResetLoading(false);
+    setResetSuccess(false);
+  };
+
+  const handleResetSubmit = (e) => {
+    e.preventDefault();
+    if (!resetEmail.trim()) {
+      alert("Please enter your email");
+      return;
+    }
+
+    setResetLoading(true);
+
+    // Simulate API call delay
+    setTimeout(() => {
+      setResetLoading(false);
+      setResetSuccess(true);
+    }, 1500);
+  };
 
   return (
-    <div className="auth-container">
+    <div className="auth-container fade-in">
       <form className="auth-form" onSubmit={onSubmit}>
-        <h2>{isLogin ? "Login" : "Sign Up"}</h2>
+        <h2>Login</h2>
 
-        {!isLogin && (
-          <input
-            type="text"
-            name="firstName"
-            placeholder="Full Name"
-            required
-          />
-        )}
-
-        {isLogin ? (
-          <input
-            type="text"
-            name="name"
-            placeholder="Username"
-            required
-          />
-        ) : (
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            required
-          />
-        )}
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          required
+          disabled={loading}
+        />
 
         <input
           type="password"
           name="password"
           placeholder="Password"
           required
+          disabled={loading}
         />
 
-        <button type="submit">{isLogin ? "Login" : "Sign Up"}</button>
-
-        <p>
-          {isLogin ? "Don't have an account?" : "Already have an account?"}
-          <Link to={isLogin ? "/signup" : "/login"}>
-            {isLogin ? " Sign up" : " Log in"}
-          </Link>
-        </p>
+        <div className="auth-actions">
+          <div className="button-wrapper">
+            <button type="submit" disabled={loading}>
+              {loading ? "Logging in..." : "Login"}
+            </button>
+          </div>
+          <div className="forgot-password">
+            <a href="#" onClick={openModal}>Forgot password?</a>
+          </div>
+        </div>
       </form>
+
+      {/* Modal */}
+      {modalVisible && (
+        <div className={`modal show`}>
+          <div className="modal-content">
+            <span className="close" onClick={closeModal}>&times;</span>
+
+            {!resetSuccess ? (
+              <>
+                <h3>Reset Password</h3>
+                <p>Enter your email and we'll send you a reset link.</p>
+                <form onSubmit={handleResetSubmit}>
+                  <input
+                    type="email"
+                    placeholder="Email"
+                    value={resetEmail}
+                    onChange={(e) => setResetEmail(e.target.value)}
+                    disabled={resetLoading}
+                    required
+                  />
+                  <button
+                    type="submit"
+                    className="modal-reset-btn"
+                    disabled={resetLoading}
+                  >
+                    {resetLoading ? "Sending..." : "Send Reset Link"}
+                  </button>
+                </form>
+              </>
+            ) : (
+              <div>
+                <h3>Success!</h3>
+                <p>
+                  If an account with <strong>{resetEmail}</strong> exists, a reset link has been sent. Please check your email.
+                </p>
+                <button className="modal-reset-btn" onClick={closeModal}>
+                  Close
+                </button>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

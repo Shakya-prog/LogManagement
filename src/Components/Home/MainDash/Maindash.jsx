@@ -1,16 +1,18 @@
-import React from 'react'
-import './MainDash.css'
-import Cards from '../Cards/Cards'
-import Table from '../Table/Table'
+import React from "react";
+import "./MainDash.css";
+import Cards from "../Cards/Cards";
+import Table from "../Table/Table";
+import TopNavBar from "../TopNavBar/TopNavBar";
 
-const Maindash = () => {
+const MainDash = ({ userEmail, onLogout }) => {
   return (
     <div className="MainDash">
-        <h1>Dashboard</h1>
-        <Cards/>
-        <Table/>
+       <TopNavBar userEmail={userEmail} onLogout={onLogout} />
+      <h1>Dashboard</h1>
+      <Cards />
+      <Table />
     </div>
-  )
-}
+  );
+};
 
-export default Maindash
+export default MainDash;
